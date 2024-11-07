@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Félicitations avec Confettis</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            color: #333;
+            overflow: hidden; /* Cache les confettis qui sortent de l'écran */
+            position: relative;
+        }
+
+        /* Style de l'image */
+        img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        /* Style du message de félicitations */
+        h1 {
+            color: red;
+            font-size: 2.5em;
+            margin: 20px 0;
+        }
+
+        /* Style du texte animé en bas */
+        .message {
+            font-size: 1.5em;
+            color: red;
+            animation: animationTexte 6s infinite ease-in-out;
+        }
+
+        /* Animation du texte */
+        @keyframes animationTexte {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Style des confettis */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 0, 0, 0.8);
+            border-radius: 50%;
+            animation: confettiAnimation 2s ease-out forwards;
+        }
+
+        @keyframes confettiAnimation {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(200px, 400px) rotate(360deg); /* Effet de mouvement et rotation */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Image de l'icône de l'école (remplace l'URL par celle de l'icône de l'école) -->
+    <img src="img.jpg" alt="Icône de l'école" style="width: 40%; height: auto;">
+
+    <!-- Titre principal -->
+    <h1>Félicitations !</h1>
+
+    <!-- Message animé -->
+    <div class="message">
+        Vous avez correctement configurer la bonne page sur votre serveur web local !
+    </div>
+
+    <script>
+        // Fonction pour générer des confettis
+        function generateConfetti(side) {
+            const confetti = document.createElement("div");
+            confetti.classList.add("confetti");
+
+            // Position initiale aléatoire et direction de lancement
+            if (side === 'left') {
+                confetti.style.left = `${Math.random() * 50}%`; // Lancer depuis la gauche
+            } else {
+                confetti.style.right = `${Math.random() * 50}%`; // Lancer depuis la droite
+            }
+
+            confetti.style.top = `${Math.random() * 20}%`;  // Lancer à différentes hauteurs
+
+            // Ajouter un randomisation des couleurs pour les confettis
+            confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+
+            // Ajouter la particule à l'écran
+            document.body.appendChild(confetti);
+
+            // Supprimer la particule après l'animation
+            setTimeout(() => {
+                confetti.remove();
+            }, 2000); // Durée de l'animation (2 secondes)
+        }
+
+        // Créer des confettis à intervalles réguliers
+        setInterval(() => {
+            generateConfetti('left');  // Lancer des confettis depuis la gauche
+            generateConfetti('right'); // Lancer des confettis depuis la droite
+        }, 300);  // Intervalle de 300ms pour générer des confettis
+
+    </script>
+
+</body>
+</html>
